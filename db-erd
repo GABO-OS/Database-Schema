@@ -1,0 +1,92 @@
+AniCrave Entity Relationship Diagram (ERD)
+This document outlines the data model for the AniCrave website, based on the current 
+db.json
+ schema and implied relationships.
+
+Overview
+The application consists of three main entities:
+
+Users: Registered accounts on the platform.
+Anime: The catalog of anime titles available.
+Favorites: A relationship linking Users to their preferred Anime.
+ER Diagram
+has
+is_in
+USER
+int
+id
+PK
+string
+username
+string
+email
+string
+password
+string
+avatar
+FAVORITE
+int
+id
+PK
+int
+user_id
+FK
+int
+anime_id
+FK
+ANIME
+int
+id
+PK
+string
+title
+string
+cover
+string
+banner
+string
+format
+int
+episodes
+string
+status
+string
+season
+int
+year
+string[]
+genres
+string
+description
+Entity Details
+User
+Represents a registered user of the application.
+
+id: Unique identifier for the user.
+username: Display name for the user.
+email: Contact email (unique).
+password: Hashed password string.
+avatar: URL to the user's profile picture.
+Anime
+Represents an anime title in the database.
+
+id: Unique identifier (likely from initial data source like AniList).
+title: Main display title.
+cover: URL to the cover image.
+banner: URL to the banner image.
+format: Media format (e.g., TV, Movie).
+episodes: Total number of episodes.
+status: Airing status (e.g., Finished, Airing).
+season: Release season (e.g., Fall, Winter).
+year: Release year.
+genres: List of associated genres.
+description: Synopsis of the anime.
+Favorite (Relationship)
+Note: Currently, the frontend implementation uses localStorage to store favorites locally on the client's device. However, strictly following the 
+db.json
+ structure implies a backend storage for favorites to sync across devices.
+
+In a database context, this entity resolves the Many-to-Many relationship between Users and Anime.
+
+user_id: Foreign key referencing a User.
+anime_id: Foreign key referencing an Anime.
